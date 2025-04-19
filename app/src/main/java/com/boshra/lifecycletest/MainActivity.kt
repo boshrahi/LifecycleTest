@@ -1,25 +1,37 @@
 package com.boshra.lifecycletest
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.boshra.lifecycletest.usecase.location.LocationScreen
+import com.boshra.lifecycletest.usecase.location.LocationViewModel
+import com.boshra.lifecycletest.usecase.location.data.LocationRepositoryImpl
+import com.boshra.lifecycletest.usecase.location.domain.GetLocationUpdatesUseCase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val context = LocalContext.current
+            // Simple manual DI:
+            val repo = LocationRepositoryImpl(this)
+            val useCase = GetLocationUpdatesUseCase(repo)
+            val vmFactory = object : ViewModelProvider.Factory {
+                override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
+                    @Suppress("UNCHECKED_CAST")
+                    return LocationViewModel(useCase) as T
+                }
+            }
+
+            setContent {
+                val viewModel = ViewModelProvider(
+                    this,
+                    vmFactory
+                )[LocationViewModel::class.java]
+                LocationScreen(viewModel)
+            }
+            //----------------------- Camera UseCase ----------------------
+            /*val context = LocalContext.current
             var hasPermission by remember {
                 mutableStateOf(
                     ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
@@ -41,7 +53,7 @@ class MainActivity : ComponentActivity() {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text("Camera permission required")
                 }
-            }
+            }*/
         }
     }
 }

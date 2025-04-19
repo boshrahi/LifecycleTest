@@ -47,12 +47,28 @@ dependencies {
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
     implementation (libs.androidx.camera.compose)
-
-
     // Compose
     implementation (libs.androidx.activity.compose)
     implementation (libs.ui)
     implementation (libs.androidx.material)
+
+    // Kotlin coroutines
+    implementation (libs.kotlinx.coroutines.core)
+    implementation (libs.kotlinx.coroutines.android)
+
+    // Lifecycle & ViewModel
+    implementation (libs.androidx.lifecycle.runtime.ktx)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    // Compose integration for ViewModel
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+    // Compose integration for Lifecycle runtime
+    implementation (libs.androidx.lifecycle.runtime.compose)
+
+    // Google Play Services Location
+    implementation (libs.play.services.location)
+    // Accompanist Permissions
+    implementation (libs.accompanist.permissions)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

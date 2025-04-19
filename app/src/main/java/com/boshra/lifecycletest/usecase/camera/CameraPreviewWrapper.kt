@@ -1,4 +1,4 @@
-package com.boshra.lifecycletest
+package com.boshra.lifecycletest.usecase.camera
 
 import android.content.Context
 import android.util.AttributeSet

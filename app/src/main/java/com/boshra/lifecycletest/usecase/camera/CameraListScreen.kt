@@ -1,4 +1,4 @@
-package com.boshra.lifecycletest
+package com.boshra.lifecycletest.usecase.camera
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

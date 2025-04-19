@@ -1,5 +1,5 @@
 // CameraPreviewContent.kt
-package com.boshra.lifecycletest
+package com.boshra.lifecycletest.usecase.camera
 
 import androidx.camera.compose.CameraXViewfinder
 import androidx.camera.core.CameraSelector
